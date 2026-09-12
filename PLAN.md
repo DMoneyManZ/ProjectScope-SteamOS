@@ -16,3 +16,7 @@
 ### 2026-09-12 — Next validation
 
 Record the user-authorized private local checkpoint on `feature/steamos-overlay`; prepare the existing preview installer for Legion Gaming Mode testing. User reports the current preview works. Real Gaming Mode/game/HUD checks remain pending. Do not publish or push to the public origin.
+
+### 2026-09-12 — Legion install, Steam shortcut, AppImage prep, public
+
+- Installed v1.20 on the Legion with `/usr/bin/python3` (the Linuxbrew `python3` on PATH lacks `gi`). Added **ProjectScope SteamOS** as a non-Steam game and launched it through Steam in Desktop Mode: overlay + studio windows up, `status` running/visible. Added AppDir builder + test + CI step. Repo made public at the user's request. Next: Gaming Mode with a real game, HUD coexistence, then a real AppImage via linuxdeploy on a build host.

@@ -1,3 +1,22 @@
+## Current checkpoint — 2026-09-12 Legion install + Steam + AppImage prep (PUBLIC)
+
+Supersedes the "keep private" instruction below: the user authorized committing to `main` and
+making this repository public on 2026-09-12. Do not re-privatize without being asked.
+
+Done this session on the Legion (Desktop Mode, no session switch):
+- Installed v1.20 with `/usr/bin/python3 <run> --install`. On the Legion the bare `python3` is
+  Linuxbrew's and has no `gi`; always use the system interpreter for the installer and CLI.
+- Added "ProjectScope SteamOS" (`~/.local/bin/projectscope-steamos`) as a non-Steam game by
+  editing the active account's `shortcuts.vdf` with Steam shut down, then relaunching Steam.
+  Backup of the original file sits next to it (`shortcuts.vdf.bak-<timestamp>`).
+- Launched it through Steam; overlay + studio windows appeared and `status` reported running.
+- Added `tools/build_appimage.py` (AppDir + validation + optional appimagetool) with
+  `tests/test_appimage_build.py` and a CI step. ⚠ Host GTK/PyGObject are not bundled.
+
+Next: real Gaming Mode with a game, HUD coexistence, then linuxdeploy-based AppImage on a build host.
+
+---
+
 ## Current checkpoint — 2026-09-12 private Legion testing
 
 User reports the preview worked and authorized a local commit named

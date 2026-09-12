@@ -19,3 +19,6 @@ support/transparency-example.png
 *.log
 *.pem
 *.key
+
+# downloaded GitHub release assets (local only)
+release-assets/

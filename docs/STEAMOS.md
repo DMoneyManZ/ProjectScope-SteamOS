@@ -120,3 +120,17 @@ Protocol references: [Valve Gamescope implementation](https://github.com/ValveSo
 ### Shortcut correction
 
 Select + Start is no longer the default: Steam uses a Start long-press to change its Desktop/Gamepad controller action set. That changes input mappings, not the operating-system desktop session. The replacement uses the verified vendor mappings L1 → Ctrl, R1 → Alt, Y → Space in the default Deck Desktop action set. Customized Steam Input layouts may need the keyboard shortcut mapped explicitly.
+
+## AppImage preparation
+
+`python3 tools/build_appimage.py` assembles `dist/appimage/ProjectScope-SteamOS.AppDir`
+(AppRun, root `.desktop` with relative `Exec=`, root icon and `.DirIcon`, `usr/bin` launcher,
+compiled schema and application source under `usr/lib/projectscope-steamos`) and validates it,
+including `desktop-file-validate` when available. If `appimagetool` is on `PATH` it also writes
+`ProjectScope-SteamOS-0.1.0-preview-x86_64.AppImage`; otherwise it stops after the AppDir with a
+warning (`--require-tool` turns that into a failure, `--check` only re-validates an existing AppDir).
+
+⚠ The AppDir uses the host Python, GTK 3, PyGObject and Pycairo exactly like the `.run` installer;
+it does **not** bundle them. Producing a self-contained AppImage that runs on hosts without those
+libraries still requires linuxdeploy with linuxdeploy-plugin-gtk on a build machine. No AppImage
+has been built or tested on SteamOS yet.

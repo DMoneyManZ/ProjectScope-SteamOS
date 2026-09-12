@@ -10,3 +10,5 @@
 - Default launch asks Keyboard/Controller/Both; explicit studio opens editor, including across existing processes via Gio HANDLES_COMMAND_LINE. Home toggles crosshair; menu shortcut remains separate. Controller-only retains CtrlAltSpace for Steam Desktop mapping. Precision increments live outside portable presets; dimensions offer .1/.25/.5 and preserve legacy default where needed. Schema minimums and keyboard .25 increments unchanged.
 
 - 2026-09-12 — User explicitly requested private status. Save the SteamOS work as a local commit titled `ProjectScope_v1.20 (SteamOS-Compatability)`, with no public push, release, or version tag. Preserve current runtime behavior for Legion Gaming Mode testing.
+
+- 2026-09-12 — User authorized making `ProjectScope-SteamOS` public and committing on `main` (supersedes the private-only entry above). Added `tools/build_appimage.py` AppDir scaffolding as the AppImage preparation step; host GTK/PyGObject remain unbundled, so no self-contained AppImage is claimed. Steam registration is done by editing the account's `shortcuts.vdf` with Steam stopped, never by GUI keystroke injection.

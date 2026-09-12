@@ -16,3 +16,7 @@
 ### 2026-09-12 — Private checkpoint for Legion testing
 
 User reports the preview worked and authorized committing the existing implementation as `ProjectScope_v1.20 (SteamOS-Compatability)`. Keep it local/private; no public push or release. Legion Gaming Mode testing is the next intended use. Fresh 67-test suite, 30 presets, GJS checks and rebuilt SteamOS installer verification pass with the missing local gi-cairo dependency supplied temporarily from /tmp.
+
+### 2026-09-12 — Legion Desktop Mode run via Steam
+
+Installed from the v1.20 release assets using the system interpreter; `~/.local/bin/projectscope-steamos` pins `/usr/bin/python3`. Non-Steam shortcut added to the active Steam account and confirmed by launching via `steam://rungameid/…` (process parent chain steam → reaper → python3). `dist/appimage/` AppDir builds and validates; `appimagetool` is not installed on the Legion. Repository visibility switched to public.
