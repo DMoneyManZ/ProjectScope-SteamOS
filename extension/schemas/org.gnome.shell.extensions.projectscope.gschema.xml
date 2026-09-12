@@ -18,5 +18,7 @@
 <key name="color-key" type="as"><default>['End']</default></key>
 <key name="og-controls" type="b"><default>false</default></key>
 <key name="updated-controls" type="s"><default>'{}'</default></key>
+<key name="control-mode" type="s"><choices><choice value="keyboard"/><choice value="controller"/><choice value="both"/></choices><default>'both'</default></key>
+<key name="precision-steps" type="s"><default>'{}'</default></key>
 </schema>
 </schemalist>

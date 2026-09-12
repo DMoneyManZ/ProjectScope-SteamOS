@@ -294,7 +294,25 @@ class Editor(Gtk.ApplicationWindow):
     def numeric(self,parent,path,title,lo,hi,step):
         widget=Gtk.SpinButton.new_with_range(lo,hi,step); widget.set_digits(2 if step<1 else 0)
         widget.set_size_request(120,-1); self.controls[path]=widget
-        widget.connect('value-changed',self.number_changed,path); self.row(parent,title,widget)
+        widget.connect('value-changed',self.number_changed,path)
+        from .precision import DIMENSIONS,options,step_for,remember
+        if path not in DIMENSIONS:
+            self.row(parent,title,widget);return
+        field=Gtk.Box(orientation=Gtk.Orientation.VERTICAL,spacing=3);field.append(widget)
+        steps=Gtk.Box(spacing=3,halign=Gtk.Align.END);steps.add_css_class('linked')
+        selected=step_for(self.cfg,path,step);widget.set_increments(selected,selected*10)
+        first=None
+        for amount in options(step):
+            choice=Gtk.ToggleButton(label=f'{amount:g}')
+            if first is None: first=choice
+            else: choice.set_group(first)
+            choice.set_tooltip_text(f'Adjustment step: {amount:g}')
+            choice.set_active(amount==selected)
+            def changed(w,value=amount):
+                if w.get_active():
+                    widget.set_increments(value,value*10);remember(self.cfg,path,value)
+            choice.connect('toggled',changed);steps.append(choice)
+        field.append(steps);self.row(parent,title,field)
 
     def boolean(self,parent,path,title):
         widget=Gtk.Switch(valign=Gtk.Align.CENTER); self.controls[path]=widget
@@ -457,7 +475,9 @@ class Editor(Gtk.ApplicationWindow):
         return False
 
 class App(Gtk.Application):
-    def __init__(self): super().__init__(application_id='io.projectscope.Crosshair',flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
+    def __init__(self):
+        super().__init__(application_id='io.projectscope.Crosshair',flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
+        Gtk.Window.set_default_icon_name(self.get_application_id())
     def do_activate(self):
         win=self.get_active_window()
         if not win: win=Editor(self)

@@ -17,6 +17,10 @@
 
 ![ProjectScope editor with its preset library, live preview, and appearance controls](docs/images/editor.png)
 
+## SteamOS preview
+
+A separate [SteamOS preview](docs/STEAMOS.md) adds a standalone Gamescope/X11 overlay, preset studio, and **L1 + R1 + Y** controller menu. It has passed isolated compositor tests on a Steam Deck; physical Gaming Mode and real-game checks are still pending. The GNOME release below is unchanged.
+
 ## Make it yours
 
 - **30 ready-made presets.** Start with a minimal dot, a precise cross, a ring, or one of the Sniper, SMG, Shotgun, and Pistol designs.

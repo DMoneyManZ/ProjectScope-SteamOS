@@ -18,6 +18,7 @@ class DesktopIdentity(unittest.TestCase):
             app = data / 'projectscope/app'
             (app / 'assets').mkdir(parents=True)
             (app / 'assets/projectscope.svg').write_bytes((ROOT / 'assets/projectscope.svg').read_bytes())
+            (app / 'assets/projectscope.png').write_bytes((ROOT / 'assets/projectscope.png').read_bytes())
             (app / 'launch.py').write_text('')
             (data / 'applications').mkdir()
             legacy = data / 'applications/projectscope.desktop'
@@ -28,5 +29,10 @@ class DesktopIdentity(unittest.TestCase):
             self.assertEqual(entry.get_icon().to_string(), 'io.projectscope.Crosshair')
             icon = data / 'icons/hicolor/scalable/apps/io.projectscope.Crosshair.svg'
             self.assertEqual(icon.read_bytes(), (ROOT / 'assets/projectscope.svg').read_bytes())
+            raster = data / 'icons/hicolor/128x128/apps/io.projectscope.Crosshair.png'
+            self.assertEqual(raster.read_bytes(), (ROOT / 'assets/projectscope.png').read_bytes())
             self.assertTrue((desktop / 'ProjectScope.desktop').exists())
             self.assertTrue(Gio.DesktopAppInfo.new_from_filename(str(legacy)).get_nodisplay())
+            helper.remove_icons(data, helper.APP_ID)
+            self.assertFalse(icon.exists())
+            self.assertFalse(raster.exists())

@@ -6,7 +6,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
-from desktop_entry import APP_ID, install_launchers
+from desktop_entry import APP_ID, install_launchers, remove_icons, refresh_desktop_caches
 
 UUID='projectscope@local'
 ROOT=Path(__file__).resolve().parents[1]
@@ -25,10 +25,11 @@ def main():
         from size_shortcuts import configure
         configure(app, uninstall=True)
         run(['gnome-extensions','disable',UUID])
-        for file in [launcher,desktop_launcher,data/'applications/projectscope.desktop',
-                     data/'icons/hicolor/scalable/apps'/(APP_ID+'.svg')]: file.unlink(missing_ok=True)
+        for file in [launcher,desktop_launcher,data/'applications/projectscope.desktop']: file.unlink(missing_ok=True)
+        remove_icons(data,APP_ID)
         for directory in [ext,app]:
             if directory.exists(): shutil.rmtree(directory)
+        refresh_desktop_caches(data)
         print('Removed ProjectScope app and extension; personal presets/settings retained.'); return 0
     for command in ['glib-compile-schemas','gnome-extensions']:
         if not shutil.which(command): raise RuntimeError(f'Missing dependency: {command}')
